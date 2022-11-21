@@ -10,7 +10,7 @@ public class App {
 
     public static void main(String[] args) {
 
-        List<String> to = Arrays.asList("rdm@rdm.ch", "lol@gmail.com", "hello@hl.swiss");
+        /*List<String> to = Arrays.asList("rdm@rdm.ch", "lol@gmail.com", "hello@hl.swiss");
 
         Email emailTest = new Email("celestin.piccin@heig-vd.ch", to,
                 "blablablablablablab", "test1");
@@ -22,6 +22,14 @@ public class App {
         }
         catch (IOException e){
             System.out.println("Error:" + e);
+        }*/
+
+        try{
+            ParseEmail parsed = new ParseEmail();
+            Group[] groups = Group.createGroups(parsed.getEmails(), 7);
+        }
+        catch (Exception e){
+            System.out.println("error: " + e);
         }
 
 
