@@ -42,5 +42,15 @@ public class Configuration {
 
     }
 
+    public String getIpv4(){
+        return ipv4;
+    }
 
+    public int getNbGroups(){
+        return nbGroups;
+    }
+
+    public int getPort(){
+        return port;
+    }
 }

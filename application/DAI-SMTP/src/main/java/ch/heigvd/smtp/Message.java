@@ -31,13 +31,13 @@ public class Message {
 				}
 				String bod = "";
 				String line = "";
-				while(!line.equals(MESSSAGE_ENDING)) {
+				while(!(line = inReader.readLine()).equals(MESSSAGE_ENDING)) {
 					if (!inReader.ready()) {
 						throw new RuntimeException("Malformed input file");
 					}
-					line = inReader.readLine();
 					bod += line + LINE_ENDING;
 				}
+				bod = bod.substring(0, bod.length()-2);
 				messages.add(new Message(sub, bod));
 			}
 			// isr.close(); => no : try with ressources
@@ -46,5 +46,13 @@ public class Message {
 			LOG.log(Level.SEVERE, "Error while reading file.", ex);
 			return messages; // TODO : ask : return what we already (correctly) read ? ... or empty ? ... or ... just rethrow ?
 		}
+	}
+
+	String getSubject(){
+		return subject;
+	}
+
+	String getBody(){
+		return body;
 	}
 }

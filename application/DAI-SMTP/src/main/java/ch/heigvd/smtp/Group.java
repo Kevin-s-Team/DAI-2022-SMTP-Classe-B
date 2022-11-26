@@ -43,4 +43,12 @@ public class Group {
 
         return res;
     }
+
+    String getSender(){
+        return sender;
+    }
+
+    List<String> getVictims(){
+        return victims;
+    }
 }

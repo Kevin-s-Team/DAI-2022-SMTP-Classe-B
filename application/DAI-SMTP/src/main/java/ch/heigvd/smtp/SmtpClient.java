@@ -3,6 +3,7 @@ package ch.heigvd.smtp;
 import java.io.*;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 
 public class SmtpClient {
     private final String END = "\r\n";
@@ -61,7 +62,22 @@ public class SmtpClient {
             throw new IOException(str);
         }
 
-        writer.write("Content-type: text/plain; charset=utf-8" + END + "Subject: " +email.getSubject() + END + END +email.getMessage() + END + "." + END);
+        writer.write("Content-type: text/plain; charset=utf-8" + END +
+                "From: " + email.getFrom() + END + "To: " + email.getTo().get(0));
+        int toSize = email.getTo().size();
+        if(toSize > 1){
+            for(int i = 1; i < toSize; i++){
+                writer.write(", " + email.getTo().get(i));
+            }
+        }
+        writer.write(END);
+
+        writer.write("Subject: =?utf-8?B?" +
+                Base64.getEncoder().encodeToString(email.getSubject().getBytes()) + "?=" + END);
+
+        writer.write(END);
+        writer.write(email.getMessage());
+        writer.write(END+"."+END);
         writer.flush();
 
         if( !(str = reader.readLine()).startsWith("250")){
