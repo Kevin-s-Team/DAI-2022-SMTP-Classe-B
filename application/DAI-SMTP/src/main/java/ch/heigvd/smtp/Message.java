@@ -9,9 +9,14 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Class representing a message of an email (body + subject)
+ *
+ * @author Célestin Piccin, Kévin Jorand
+ */
 public class Message {
-	private String subject;
-	private String body;
+	private final String subject;
+	private final String body;
 	private static final String LINE_ENDING = "\r\n";
 	private static final String MESSSAGE_ENDING = ".";
 	private static final Logger LOG = Logger.getLogger(Message.class.getName());
