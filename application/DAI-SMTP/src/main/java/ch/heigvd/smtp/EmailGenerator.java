@@ -1,5 +1,6 @@
 package ch.heigvd.smtp;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -11,7 +12,7 @@ public class EmailGenerator {
 
     private static final Random random = new Random();
 
-    public EmailGenerator(Group[] groups, String path){
+    public EmailGenerator(Group[] groups, String path) throws IOException, RuntimeException {
         this.groups = groups;
         messages = Message.readMessages(path);
     }

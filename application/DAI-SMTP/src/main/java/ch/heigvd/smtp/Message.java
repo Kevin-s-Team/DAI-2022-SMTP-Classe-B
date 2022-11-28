@@ -2,6 +2,7 @@ package ch.heigvd.smtp;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -21,7 +22,7 @@ public class Message {
 		this.body = body;
 	}
 
-	static public ArrayList<Message> readMessages(String inputFile){
+	static public ArrayList<Message> readMessages(String inputFile) throws IOException, RuntimeException {
 		ArrayList<Message> messages = new ArrayList<>();
 		try (BufferedReader inReader = new BufferedReader(new InputStreamReader(new FileInputStream(inputFile), StandardCharsets.UTF_8));) {
 			while(inReader.ready()){
@@ -43,8 +44,8 @@ public class Message {
 			// isr.close(); => no : try with ressources
 			return messages;
 		} catch (Exception ex) {
-			LOG.log(Level.SEVERE, "Error while reading file.", ex);
-			return messages; // TODO : ask : return what we already (correctly) read ? ... or empty ? ... or ... just rethrow ?
+			LOG.log(Level.SEVERE, "Error while reading message file.", ex);
+			throw ex;
 		}
 	}
 
