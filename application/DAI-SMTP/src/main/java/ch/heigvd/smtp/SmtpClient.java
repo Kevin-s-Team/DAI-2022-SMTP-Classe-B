@@ -39,7 +39,7 @@ public class SmtpClient {
             }
         }
 
-        writer.write("MAIL FROM: " + email.getFrom() + END);
+        writer.write("MAIL FROM: <" + email.getFrom() + ">" + END);
         writer.flush();
 
         if( !(str = reader.readLine()).startsWith("250")){
@@ -47,7 +47,7 @@ public class SmtpClient {
         }
 
         for(int i = 0; i < email.getTo().size(); i++){
-            writer.write("RCPT TO: " + email.getTo().get(i) + END);
+            writer.write("RCPT TO: <" + email.getTo().get(i) + ">" + END);
             writer.flush();
 
             if( !(str = reader.readLine()).startsWith("250")){
