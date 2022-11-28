@@ -1,4 +1,4 @@
-FROM openjdk:17-jre
+FROM eclipse-temurin:17-jdk-jammy
 LABEL authors="Piccin Célestin, Jorand Kévin"
 
 COPY MockMock-1.4.1-SNAPSHOT.one-jar.jar /opt/app/MockMock.jar
