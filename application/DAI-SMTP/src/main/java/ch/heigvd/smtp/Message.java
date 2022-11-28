@@ -22,7 +22,7 @@ public class Message {
 		this.body = body;
 	}
 
-	static public ArrayList<Message> readMessages(String inputFile) throws IOException, RuntimeException {
+	static public ArrayList<Message> readMessages(String inputFile) throws IOException {
 		ArrayList<Message> messages = new ArrayList<>();
 		try (BufferedReader inReader = new BufferedReader(new InputStreamReader(new FileInputStream(inputFile), StandardCharsets.UTF_8));) {
 			while(inReader.ready()){
