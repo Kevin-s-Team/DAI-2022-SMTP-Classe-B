@@ -111,4 +111,32 @@ public class Configuration {
     public int getPort(){
         return port;
     }
+
+    /**
+     * Testing just a few use cases
+     *
+     * @param args unused
+     */
+    public static void main(String[] args) {
+        List<String> tests = List.of(
+                "./application/DAI-SMTP/config/config.txt",
+                "./application/DAI-SMTP/config/config.error_notExists.txt",
+                "./application/DAI-SMTP/config/Errors/config.error.txt",
+                "./application/DAI-SMTP/config/Errors/config.error2.txt",
+                "./application/DAI-SMTP/config/Errors/config.error3.txt",
+                "./application/DAI-SMTP/config/Errors/config.error3.1.txt",
+                "./application/DAI-SMTP/config/Errors/config.error3.2.txt");
+
+        for(String t : tests) {
+            try {
+                System.out.println("Testing with : " + t);
+                Configuration c = new Configuration(t);
+                System.out.println(c.getIpv4());
+                System.out.println(c.getPort());
+                System.out.println(c.getNbGroups());
+            } catch (Exception e) {
+                System.out.println("error: " + e);
+            }
+        }
+    }
 }

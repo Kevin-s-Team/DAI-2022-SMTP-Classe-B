@@ -18,7 +18,7 @@ import java.util.regex.Pattern;
 public class ParseEmail {
 
     //REGEX for email verification, found on the internet, I don't remember where...
-    private static final Pattern EMAIL_VERIFICATION = Pattern.compile("^([\\w-.]+){1,64}@([\\w&&[^_]]+){2,255}.[a-z]{2,}$");
+    private static final Pattern EMAIL_VERIFICATION = Pattern.compile("^([\\w-\\.]+){1,64}@([\\w&&[^_]]+){2,255}\\.[a-z]{2,}$");
     private final List<String> emails = new ArrayList<>();
 
     /**
@@ -70,5 +70,32 @@ public class ParseEmail {
      */
     public List<String> getEmails(){
         return emails;
+    }
+
+    /**
+     * Testing only a few use cases
+     *
+     * @param args unused
+     */
+    public static void main(String[] args) {
+        List<String> tests = List.of(
+                "./application/DAI-SMTP/config/emails.txt",
+                "./application/DAI-SMTP/config/emails.error_notExists.txt",
+                "./application/DAI-SMTP/config/Errors/emails.error.txt",
+                "./application/DAI-SMTP/config/Errors/emails.error2.txt",
+                "./application/DAI-SMTP/config/Errors/emails.error3.txt");
+
+        for(String t : tests) {
+            try {
+                System.out.println("Testing with : " + t);
+                ParseEmail p = new ParseEmail(t);
+                List<String> em = p.getEmails();
+                System.out.println(em.size());
+                System.out.println(em.get(em.size() - 2));
+                System.out.println(em.get(em.size() - 1));
+            } catch (Exception e) {
+                System.out.println("error: " + e);
+            }
+        }
     }
 }

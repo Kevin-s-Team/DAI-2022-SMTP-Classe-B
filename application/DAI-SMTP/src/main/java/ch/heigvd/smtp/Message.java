@@ -6,8 +6,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.List;
 
 /**
  * Class representing the message of an email (body + subject) and allowing to generate a list of said objects from
@@ -23,8 +22,6 @@ public class Message {
 	// Constants
 	private static final String LINE_ENDING = "\r\n";
 	private static final String MESSAGE_ENDING = ".";
-
-	private static final Logger LOG = Logger.getLogger(Message.class.getName());
 
 	/**
 	 * Constructor of a message passing the subject and body directly.
@@ -79,26 +76,50 @@ public class Message {
 			// no "isr.close();" : try with ressources
 			return messages;
 		} catch (Exception ex) {
-			LOG.log(Level.SEVERE, "Error while reading message file.", ex);
+			System.out.println("Error while reading message file.");
 			throw ex;
 		}
 	}
 
+	/**
+	 * Testing just a few use cases
+	 *
+	 * @param args unused
+	 */
 	public static void main(String[] args) {
-		try {
-			ArrayList<Message> m = Message.readMessages("./application/DAI-SMTP/config/messages.txt");
-			System.out.println(m.size());
-			System.out.println(m.get(m.size()-2).getBody());
-			System.out.println(m.get(m.size()-1).getBody());
-		}catch (Exception e){
-			// Don't care!!
+		List<String> tests = List.of(
+				"./application/DAI-SMTP/config/messages.txt",
+				"./application/DAI-SMTP/config/messages.error_notFound.txt",
+				"./application/DAI-SMTP/config/Errors/messages.error.txt",
+				"./application/DAI-SMTP/config/Errors/messages.error_malformed.txt");
+
+		for(String t : tests) {
+			try {
+				System.out.println("Testing with : " + t);
+				ArrayList<Message> m = Message.readMessages(t);
+				System.out.println(m.size());
+				System.out.println(m.get(m.size() - 2).getBody());
+				System.out.println(m.get(m.size() - 1).getBody());
+			} catch (Exception e) {
+				System.out.println("error: " + e);
+			}
 		}
 	}
 
+	/**
+	 * Simple getter for the subject
+	 *
+	 * @return the message subject
+	 */
 	String getSubject(){
 		return subject;
 	}
 
+	/**
+	 * Simple getter for the body
+	 *
+	 * @return the message body
+	 */
 	String getBody(){
 		return body;
 	}
