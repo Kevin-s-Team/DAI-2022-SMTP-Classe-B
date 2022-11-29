@@ -32,7 +32,7 @@ public class SmtpClient {
      * Public method, sends an email using SMTP
      *
      * @param email the email to be sent
-     * @throws IOException
+     * @throws IOException in case SMTP server's response is not as expected
      */
     public void sendEmail(Email email) throws IOException {
         Socket socket = new Socket(serverAddress, serverPort);
@@ -63,7 +63,7 @@ public class SmtpClient {
         }
 
         /* STEP 3: MAIL FROM */
-        writer.write("MAIL FROM: <" + email.getFrom() + ">" + END);
+        writer.write("MAIL FROM: <" + email.from() + ">" + END);
         writer.flush();
 
         if( !(str = reader.readLine()).startsWith("250")){ //check response after MAIL FROM
@@ -72,8 +72,8 @@ public class SmtpClient {
 
 
         /* STEP 4: RCPT TO */
-        for(int i = 0; i < email.getTo().size(); i++){ //send RCPT TO for every receptionist
-            writer.write("RCPT TO: <" + email.getTo().get(i) + ">" + END);
+        for(int i = 0; i < email.to().size(); i++){ //send RCPT TO for every receptionist
+            writer.write("RCPT TO: <" + email.to().get(i) + ">" + END);
             writer.flush();
 
             if( !(str = reader.readLine()).startsWith("250")){ //check response after RCPT TO
@@ -91,23 +91,23 @@ public class SmtpClient {
 
         //write content-type, from and first to
         writer.write("Content-type: text/plain; charset=utf-8" + END +
-                "From: " + email.getFrom() + END + "To: " + email.getTo().get(0));
+                "From: " + email.from() + END + "To: " + email.to().get(0));
 
-        int toSize = email.getTo().size();
+        int toSize = email.to().size();
         if(toSize > 1){ //if multiple receptionist => complete the to section
             for(int i = 1; i < toSize; i++){
-                writer.write(", " + email.getTo().get(i));
+                writer.write(", " + email.to().get(i));
             }
         }
         writer.write(END);
 
         //write the subject of the email, encoded in Base64
         writer.write("Subject: =?utf-8?B?" +
-                Base64.getEncoder().encodeToString(email.getSubject().getBytes()) + "?=" + END);
+                Base64.getEncoder().encodeToString(email.subject().getBytes()) + "?=" + END);
         writer.write(END);
 
         //write the body of the message
-        writer.write(email.getMessage());
+        writer.write(email.message());
 
         //finally terminate with a \r\n.\r\n and flush
         writer.write(END+"."+END);

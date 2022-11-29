@@ -18,14 +18,14 @@ import java.util.regex.Pattern;
 public class ParseEmail {
 
     //REGEX for email verification, found on the internet, I don't remember where...
-    private static final Pattern EMAIL_VERIFICATION = Pattern.compile("^([\\w-\\.]+){1,64}@([\\w&&[^_]]+){2,255}.[a-z]{2,}$");
-    private final List<String> emails = new ArrayList<String>();
+    private static final Pattern EMAIL_VERIFICATION = Pattern.compile("^([\\w-.]+){1,64}@([\\w&&[^_]]+){2,255}.[a-z]{2,}$");
+    private final List<String> emails = new ArrayList<>();
 
     /**
      * Constructor of ParseEmail
      *
      * @param path the path to the file containing the emails to be read
-     * @throws Exception
+     * @throws Exception In case there is a problem reading the file in path
      */
     public ParseEmail(String path) throws Exception{
         readEmails(path);
@@ -46,7 +46,7 @@ public class ParseEmail {
      * Private method, read the emails in a file
      *
      * @param path path to the file
-     * @throws Exception
+     * @throws Exception In case there is a problem reading the file
      */
     private void readEmails(String path) throws Exception{
 

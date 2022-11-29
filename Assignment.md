@@ -8,7 +8,7 @@ In this lab, you will develop a client application (TCP) in Java. This client ap
 
 * Make practical experiments to become familiar with the **SMTP protocol**. After the lab, you should be able to use a command line tool to **communicate with an SMTP server**. You should be able to send well-formed messages to the server, in order to send emails to the address of your choice.
 
-* Understand the notions of **test double** and **mock server**, which are useful when developing and testing a client-server application. During the lab, you will setup and use such a **mock server**.
+* Understand the notions of **test double** and **mock server**, which are useful when developing and testing a client-server application. During the lab, you will set up and use such a **mock server**.
 
 * Understand what it means to **implement the SMTP protocol** and be able to send e-mail messages, by working directly on top of the Socket API (i.e. you are not allowed to use a SMTP library).
 

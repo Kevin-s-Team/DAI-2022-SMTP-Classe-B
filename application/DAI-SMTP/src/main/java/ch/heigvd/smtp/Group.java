@@ -46,7 +46,7 @@ public class Group {
         int counter = 0;
 
         for(int i = 0; i < nbGroup; i++){ //for every group
-            List<String> vict = new ArrayList<String>();
+            List<String> vict = new ArrayList<>();
             for(int j = 0; j < sizeOfGroup-1; j++){ //we retrieve the victims
                 vict.add(emails.get(counter++));
             }

@@ -24,10 +24,10 @@ public class EmailGenerator {
      *
      * @param groups an array of groups to prank
      * @param path the path to the file containing the messages (body + subject)
-     * @throws IOException
-     * @throws RuntimeException
+     * @throws IOException in case of reading error from File (or if the file is not found [FileNotFound])
+     * @throws RuntimeException in case of file content not matching the required design
      */
-    public EmailGenerator(Group[] groups, String path) throws IOException, RuntimeException {
+    public EmailGenerator(Group[] groups, String path) throws IOException {
         this.groups = groups;
         messages = Message.readMessages(path);
     }
@@ -38,7 +38,7 @@ public class EmailGenerator {
      * @return an array of emails for the prank
      */
     public ArrayList<Email> generateEmails(){
-        ArrayList<Email> emails = new ArrayList<Email>(groups.length);
+        ArrayList<Email> emails = new ArrayList<>(groups.length);
         String from, body, subject;
         List<String> to;
 
