@@ -78,6 +78,8 @@ To use the prank generator, you should edit and place the correct setup in the f
 # Implementation details
 Most of the usefull information can be found directly in the code documentation itself, however, we'll see a few global key points here.
 
+An interesting point to note is that, while note ideal in an enterprise environment, in a school project, it is very interesting to see that the different classes have been implemented using different "ways", different "views"
+
 ## Class diagram
 TODO ?
 
