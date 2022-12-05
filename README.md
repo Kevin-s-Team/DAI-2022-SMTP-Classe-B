@@ -80,17 +80,9 @@ Most of the usefull information can be found directly in the code documentation 
 
 An interesting point to note is that, while note ideal in an enterprise environment, in a school project, it is very interesting to see that the different classes have been implemented using different "ways", different "views"
 
-## Class diagram
-TODO ?
-
 ## Client-Server Dialogue example
 We can find directly in the [RFC5321](https://tools.ietf.org/html/rfc5321) an example of dialogue. In particular in the [appendix D1](https://tools.ietf.org/html/rfc5321#appendix-D) :
 
 ![Typical dialogue](./figures/Typical_SMTP_Scenario.PNG)
-
-## Example
-Here are a few screenshots of running the full process.
-
-TODO ?
 
 
