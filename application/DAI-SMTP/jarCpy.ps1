@@ -1,0 +1,1 @@
+cp ...\..\out\artifacts\DAI_SMTP_jar\DAI-SMTP.jar .\DAI-SMTP.jar

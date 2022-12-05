@@ -1,3 +1,4 @@
 **/.idea/
 **/target/
 application/DAI-SMTP/DAI-SMTP.iml
+out/*

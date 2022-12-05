@@ -5,8 +5,9 @@ Célestin Piccin & Kévin Jorand
 
 ------------
 
-TODO
-A brief description of your project: if people exploring GitHub find your repo, without a prior knowledge of the API course, they should be able to understand what your repo is all about and whether they should look at it more closely.
+This repo contains an "e-mail prank generator", written in Java, as well as a mock stmp server running in a Docker container. To be precise, there are all the commands to build the docker image and to run the mock server in a container.
+
+To use the prank generator, you should set up the following files. It then generates groups from the adresses, from which one is the (fake) sender and the other ones the recipients. It chooses a "prank message" from the list.
 
 # File formats
 
@@ -55,14 +56,39 @@ bodyN
 .
 ```
 
-TODO
-What is MockMock (or any other mock SMTP server you decided to use)?
+# Mock STMP Server
 
-TODO
-Instructions for setting up your mock SMTP server (with Docker - which you will learn all about in the next 2 weeks). The user who wants to experiment with your tool but does not really want to send pranks immediately should be able to use a mock SMTP server. For people who are not familiar with this concept, explain it to them in simple terms. Explain which mock server you have used and how you have set it up.
+We used a version of Mockmock, which is a mock SMTP server to test and run our prank generator in order to avoid making requests against a "real one". Thus avoiding annoying the real owners of the e-mail adresses, but even more importantly, not generating a whole lot of SPAM and risking getting banned.
 
-TODO
-Clear and simple instructions for configuring your tool and running a prank campaign. If you do a good job, an external user should be able to clone your repo, edit a couple of files and send a batch of e-mails in less than 10 minutes.
+A mock SMTP server will act as one, to the sender but capture all the emails and not forward them to any other third-party server. 
 
-TODO
-A description of your implementation: document the key aspects of your code. It is a good idea to start with a class diagram. Decide which classes you want to show (focus on the important ones) and describe their responsibilities in text. It is also certainly a good idea to include examples of dialogues between your client and an SMTP server (maybe you also want to include some screenshots here).
+# Using Mockmock
+To run the Mockmock server in this repo in Docker, you should first have Docker installed. The we conveniently wrote 2 scripts ( [build.ps1](./mockmock/build.ps1) / [run.ps1](./mockmock/run.ps1) ). Those are written to be run on Windows, but since the Docker commands do not really change accross platforms, there shouldn't be much to do to get them working on another OS.
+
+First, ensure Docker is running on your computer. Then laucnch the [build.ps1](./mockmock/build.ps1) script to build the image from the [Dockerfile](./mockmock/Dockerfile). As soon as it is fiished, you can lauch the [run.ps1](./mockmock/run.ps1) script to actually get the server up and running. That's it. 
+
+The SMTP server then listens on port 25, the standard port. It then also operates on port 8282 which is the port being listened for the webinterface. The user can thus reach [localhost:8282](http://localhost:8282)  to have acces to the mock SMTP server's web user interface, seing all the emails that have been (falsely) sent through that SMTP server.
+
+# Using the prank generator
+*:warning: Ensure you do not send massive amount of unrequested emails!*
+
+To use the prank generator, you should edit and place the correct setup in the files described above. You can then run a prank campaign simply by running the 
+[runPrank.ps1](./application/DAI-SMTP/runPrank.ps1) script file. If you encounter any error, ensure you're running the lattest version of Java and jre on your computer and that your Docker container is running.
+
+# Implementation details
+Most of the usefull information can be found directly in the code documentation itself, however, we'll see a few global key points here.
+
+## Class diagram
+TODO ?
+
+## Client-Server Dialogue example
+We can find directly in the [RFC5321](https://tools.ietf.org/html/rfc5321) an example of dialogue. In particular in the [appendix D1](https://tools.ietf.org/html/rfc5321#appendix-D) :
+
+![Typical dialogue](./figures/Typical_SMTP_Scenario.PNG)
+
+## Example
+Here are a few screenshots of running the full process.
+
+TODO ?
+
+
